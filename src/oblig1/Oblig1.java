@@ -20,22 +20,6 @@ public class Oblig1 {
         a[i] = a[j];
         a[j] = temp;
     }
-
-    public static int min(int[] a) {
-        if(a.length == 0){
-            throw new NoSuchElementException("Tabellen er tom!");
-        }
-        
-        int min = a[0];
-        int m = 0;
-        for (int i = 0; i < a.length-1; i++) {
-            if(a[i] > a[i+1]){
-                bytt(a,i,i+1);
-                System.out.println(Arrays.toString(a));
-            }
-        }
-        return min;
-    }
     
     public static int[] randPerm(int n) { //genererer en tilfeldig array med tall
         Random r = new Random();
@@ -51,4 +35,27 @@ public class Oblig1 {
 
         return a;
     }
+
+    public static int min(int[] a) { //må finne antall sammenligninger 
+        if(a.length == 0){
+            throw new NoSuchElementException("Tabellen er tom!");
+        }
+        
+        for (int i = 0; i < a.length-1; i++) {
+            if(a[i] > a[i+1]){
+                bytt(a,i,i+1);
+                System.out.println(Arrays.toString(a));
+            }
+        }
+        return a[0];
+    }
+    
+    public static int ombyttinger(int[] a){
+        int ant = 0;
+        
+        
+        
+        return ant;
+    }
+    
 }
