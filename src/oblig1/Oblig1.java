@@ -11,9 +11,10 @@ public class Oblig1 {
     public static void main(String... args) {
         int[] random = randPerm(10);
         int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
-        System.out.println(Arrays.toString(random));
-        delsortering(random);
-        System.out.println(Arrays.toString(random));
+        char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        System.out.println(Arrays.toString(a));
+        rotasjon(a, 7);
+        System.out.println(Arrays.toString(a));
     }
 
     public static void bytt(int[] a, int i, int j) {
@@ -25,7 +26,7 @@ public class Oblig1 {
     public static void sortering(int[] a, int v, int h) {
         for (int i = h; i > v; i--) {
             int m = maks(a, v, i);
-            System.out.print(m+",");
+            System.out.print(m + ",");
             bytt(a, i - 1, m);
         }
     }
@@ -149,7 +150,7 @@ public class Oblig1 {
 
     public static void delsortering(int[] a) {
         int lengde = a.length;
-        int v = 0, h = lengde-1;
+        int v = 0, h = lengde - 1;
 
         while (v < h) {
             if (((a[v] % 2) == 0) && !((a[h] % 2) == 0)) {
@@ -160,11 +161,38 @@ public class Oblig1 {
                 h--;
             } else if (!((a[h] % 2) == 0)) {
                 v++;
-            } else if(!((a[v] % 2) == 0) && ((a[h] % 2) == 0)){
+            } else if (!((a[v] % 2) == 0) && ((a[h] % 2) == 0)) {
                 v++;
                 h--;
             }
         }
-        System.out.println(Arrays.toString(a) + " " + v + " " + h);
+        //System.out.println(Arrays.toString(a) + " " + v + " " + h);
+    }
+
+    public static void rotasjon(char[] a) {
+        int lengde = a.length - 1;
+        char mellomholder = a[lengde];
+
+        for (int i = lengde; i > 0; i--) {
+            a[i] = a[i - 1];
+        }
+        a[0] = mellomholder;
+        System.out.println(Arrays.toString(a));
+    }
+
+    public static void rotasjon(char[] a, int k) {
+        int lengde = a.length - 1;
+        char mellomholder;
+        int i = lengde, antganger = 0;
+
+        while (antganger < k) {
+            mellomholder = a[lengde];
+            for (int j = lengde; j > 0; j--) {
+                a[j] = a[j - 1];
+            }
+            a[0] = mellomholder;
+            antganger++;
+            i--;
+        }
     }
 }
