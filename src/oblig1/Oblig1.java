@@ -10,16 +10,46 @@ public class Oblig1 {
 
     public static void main(String... args) {
         int[] random = randPerm(10);
-        int[] rekke = {1, 1, 1, 3, 3, 3, 5, 5, 5, 7, 7};
-        System.out.println(Arrays.toString(rekke));
-        System.out.println(modus2(rekke));
-        System.out.println(Arrays.toString(rekke));
+        int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
+        System.out.println(Arrays.toString(random));
+        delsortering(random);
+        System.out.println(Arrays.toString(random));
     }
 
     public static void bytt(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;
+    }
+
+    public static void sortering(int[] a, int v, int h) {
+        for (int i = h; i > v; i--) {
+            int m = maks(a, v, i);
+            System.out.print(m+",");
+            bytt(a, i - 1, m);
+        }
+    }
+
+    public static int maks(int[] a, int fra, int til) { //størsteveri i et utvalgt snitt av en array
+        //fratilKontroll(a.length, fra, til);
+
+        if (a == null) {
+            throw new NullPointerException("Tabellen er null!");
+        }
+        if (a == null) {
+            throw new NullPointerException("Tabellen er null!");
+        }
+
+        int m = fra;
+        int maksverdi = a[fra];
+
+        for (int i = fra + 1; i < til; i++) {
+            if (a[i] > maksverdi) {
+                m = i;
+                maksverdi = a[m];
+            }
+        }
+        return m;
     }
 
     public static int[] randPerm(int n) { //genererer en tilfeldig array med tall
@@ -116,9 +146,25 @@ public class Oblig1 {
         }
         return maksverdi;
     }
-    
-    
-    public static void delsortering(int[] a){
-        
+
+    public static void delsortering(int[] a) {
+        int lengde = a.length;
+        int v = 0, h = lengde-1;
+
+        while (v < h) {
+            if (((a[v] % 2) == 0) && !((a[h] % 2) == 0)) {
+                bytt(a, v, h);
+                v++;
+                h--;
+            } else if ((a[v] % 2) == 0) {
+                h--;
+            } else if (!((a[h] % 2) == 0)) {
+                v++;
+            } else if(!((a[v] % 2) == 0) && ((a[h] % 2) == 0)){
+                v++;
+                h--;
+            }
+        }
+        System.out.println(Arrays.toString(a) + " " + v + " " + h);
     }
 }
