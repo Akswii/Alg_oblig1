@@ -13,7 +13,7 @@ public class Oblig1 {
         int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         System.out.println(Arrays.toString(a));
-        rotasjon(a, -2);
+        rotasjon(a,100000);
         System.out.println(Arrays.toString(a));
     }
 
@@ -29,6 +29,29 @@ public class Oblig1 {
             System.out.print(m + ",");
             bytt(a, i - 1, m);
         }
+    }
+
+    public static int antPlasser(int t) {
+        int ant = 0;
+        if (t > 0) {
+            while (t > 0) {
+                if (ant == 10) {
+                    ant = 0;
+                }
+                ant++;
+                t--;
+            }
+        } else {
+            while (t < 0) {
+                if (ant == 10) {
+                    ant = 0;
+                }
+                ant++;
+                t++;
+            }
+        }
+        if(ant == 10) return 0;
+        return ant;
     }
 
     public static int maks(int[] a, int fra, int til) { //størsteveri i et utvalgt snitt av en array
@@ -92,6 +115,7 @@ public class Oblig1 {
 
         for (int i = 1; i < a.length; i++) {
             if (a[m] > a[i]) {
+    
                 bytt(a, m, i);
                 ant++;
             }
@@ -183,14 +207,15 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a, int k) {
+        int nyK = antPlasser(k);
         if (a.length != 0) {
-
             int lengde = a.length - 1;
             char mellomholder;
             int antganger = 0;
 
-            if (k >= 0) {
-                while (antganger < k) {
+            if (nyK >= 0) {
+                while (antganger < nyK) {
+
                     mellomholder = a[lengde];
                     for (int j = lengde; j > 0; j--) {
                         a[j] = a[j - 1];
@@ -199,13 +224,13 @@ public class Oblig1 {
                     antganger++;
                 }
             } else {
-                while (antganger > k){
-                mellomholder = a[0];
-                for (int j = 0; j < lengde; j++) {
-                    a[j] = a[j + 1];
-                }
-                a[lengde] = mellomholder;
-                antganger--;
+                while (antganger > nyK) {
+                    mellomholder = a[0];
+                    for (int j = 0; j < lengde; j++) {
+                        a[j] = a[j + 1];
+                    }
+                    a[lengde] = mellomholder;
+                    antganger--;
                 }
             }
         }
