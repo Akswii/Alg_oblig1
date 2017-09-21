@@ -10,10 +10,8 @@ public class Oblig1 {
 
     public static void main(String... args) {
         int[] random = randPerm(10);
-        int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
-        char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-        System.out.println(Arrays.toString(a));
-        rotasjon(a,100000);
+        char[] a = {'A','B','C','D','E','F','G','H','I','J'};
+        rotasjon(a,4);
         System.out.println(Arrays.toString(a));
     }
 
@@ -31,31 +29,7 @@ public class Oblig1 {
         }
     }
 
-    public static int antPlasser(int t) {
-        int ant = 0;
-        if (t > 0) {
-            while (t > 0) {
-                if (ant == 10) {
-                    ant = 0;
-                }
-                ant++;
-                t--;
-            }
-        } else {
-            while (t < 0) {
-                if (ant == 10) {
-                    ant = 0;
-                }
-                ant++;
-                t++;
-            }
-        }
-        if(ant == 10) return 0;
-        return ant;
-    }
-
-    public static int maks(int[] a, int fra, int til) { //størsteveri i et utvalgt snitt av en array
-        //fratilKontroll(a.length, fra, til);
+    public static int maks(int[] a, int fra, int til) {
 
         if (a == null) {
             throw new NullPointerException("Tabellen er null!");
@@ -76,7 +50,7 @@ public class Oblig1 {
         return m;
     }
 
-    public static int[] randPerm(int n) { //genererer en tilfeldig array med tall
+    public static int[] randPerm(int n) {
         Random r = new Random();
         int[] a = new int[n];
 
@@ -91,7 +65,7 @@ public class Oblig1 {
         return a;
     }
 
-    public static int min(int[] a) { //må finne antall sammenligninger 
+    public static int min(int[] a) {
         if (a.length == 0) {
             throw new NoSuchElementException("Tabellen er tom!");
         }
@@ -106,7 +80,7 @@ public class Oblig1 {
         return a[0];
     }
 
-    public static int ombyttinger(int[] a) { //mer eller mindre effektiv?
+    public static int ombyttinger(int[] a) {
         if (a.length == 0) {
             throw new NoSuchElementException("Tabellen er tom!");
         }
@@ -115,7 +89,7 @@ public class Oblig1 {
 
         for (int i = 1; i < a.length; i++) {
             if (a[m] > a[i]) {
-    
+
                 bytt(a, m, i);
                 ant++;
             }
@@ -207,7 +181,9 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a, int k) {
-        int nyK = antPlasser(k);
+        int nyK = a.length;
+        k %= nyK;
+        System.out.println(nyK);
         if (a.length != 0) {
             int lengde = a.length - 1;
             char mellomholder;
@@ -234,5 +210,27 @@ public class Oblig1 {
                 }
             }
         }
+    }
+
+    public static String flett(String... s) {
+        String r = "";
+        int l = 0;
+
+        for (String x : s) {
+            l += x.length();
+        }
+
+        int[] c = new int[s.length];
+
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < s.length; j++) {
+                if (c[j] < s[j].length()) {
+                    r += s[j].toCharArray()[c[j]];
+                    c[j]++;
+                }
+            }
+        }
+
+        return r;
     }
 }
