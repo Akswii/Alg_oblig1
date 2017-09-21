@@ -89,7 +89,7 @@ public class Oblig1 {
         long tid = System.currentTimeMillis();
         Oblig1.rotasjon(x, 99_999);
         tid = System.currentTimeMillis() - tid;
-
+        System.out.println(tid);
         if (tid > 20) {
             System.out.println("Oppgave 6: i) Metoden "
                     + "er for ineffektiv. må forbedres!");
@@ -317,6 +317,8 @@ public class Oblig1 {
                     a[lengde] = mellomholder;
                     antganger--;
                 }
+                //regne ut hvor mange ganger rotasjonen går rundt, 
+                //finne ut posisjonen til siste rotasjon og plassere elementene
             }
         }
     }
