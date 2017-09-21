@@ -13,7 +13,7 @@ public class Oblig1 {
         int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         System.out.println(Arrays.toString(a));
-        rotasjon(a, 7);
+        rotasjon(a, -2);
         System.out.println(Arrays.toString(a));
     }
 
@@ -170,29 +170,44 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a) {
-        int lengde = a.length - 1;
-        char mellomholder = a[lengde];
+        if (a.length != 0) {
+            int lengde = a.length - 1;
+            char mellomholder = a[lengde];
 
-        for (int i = lengde; i > 0; i--) {
-            a[i] = a[i - 1];
+            for (int i = lengde; i > 0; i--) {
+                a[i] = a[i - 1];
+            }
+            a[0] = mellomholder;
+            System.out.println(Arrays.toString(a));
         }
-        a[0] = mellomholder;
-        System.out.println(Arrays.toString(a));
     }
 
     public static void rotasjon(char[] a, int k) {
-        int lengde = a.length - 1;
-        char mellomholder;
-        int i = lengde, antganger = 0;
+        if (a.length != 0) {
 
-        while (antganger < k) {
-            mellomholder = a[lengde];
-            for (int j = lengde; j > 0; j--) {
-                a[j] = a[j - 1];
+            int lengde = a.length - 1;
+            char mellomholder;
+            int antganger = 0;
+
+            if (k >= 0) {
+                while (antganger < k) {
+                    mellomholder = a[lengde];
+                    for (int j = lengde; j > 0; j--) {
+                        a[j] = a[j - 1];
+                    }
+                    a[0] = mellomholder;
+                    antganger++;
+                }
+            } else {
+                while (antganger > k){
+                mellomholder = a[0];
+                for (int j = 0; j < lengde; j++) {
+                    a[j] = a[j + 1];
+                }
+                a[lengde] = mellomholder;
+                antganger--;
+                }
             }
-            a[0] = mellomholder;
-            antganger++;
-            i--;
         }
     }
 }
