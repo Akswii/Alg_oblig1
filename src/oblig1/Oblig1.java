@@ -11,12 +11,101 @@ public class Oblig1 {
     public static void main(String... args) {
         int[] random = randPerm(10);
         int[] rekke = {1, 10, 4, 9, 7, 2, 6, 5, 3, 8};
-        char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-        System.out.println(Arrays.toString(a));
-        rotasjon(a, 100000);
-        System.out.println(Arrays.toString(a));
-        oppgave6();
+        oppgave7();
     }
+     ///// Oppgave 7 //////////////////////////////////////
+
+  public static int oppgave7()
+  {
+    int antallFeil = 0;
+    String s = null;
+
+    try
+    {
+      s = Oblig1.flett("","");  // kaller metoden
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
+      System.out.println
+        ("Oppgave 7a: a) Skal ikke kaste unntak for to tomme tegnstrenger!!");
+        antallFeil++;
+    }
+
+    if (s.compareTo("") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: b) Svaret skal bli lik en tom streng!");
+        antallFeil++;
+    }
+
+    try
+    {
+      s = Oblig1.flett("","AB");  // kaller metoden
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
+      System.out.println
+        ("Oppgave 7a: c) Skal ikke kaste unntak for en tom tegnstreng!!");
+        antallFeil++;
+    }
+
+    if (s.compareTo("AB") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: d) Svaret skal bli lik AB");
+        antallFeil++;
+    }
+
+    try
+    {
+      s = Oblig1.flett("AB","");  // kaller metoden
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
+      System.out.println
+        ("Oppgave 7a: e) Skal ikke kaste unntak for en tom tegnstreng!!");
+        antallFeil++;
+    }
+
+    if (s.compareTo("AB") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: f) Svaret skal bli lik AB");
+        antallFeil++;
+    }
+
+    s = Oblig1.flett("A", "BCDEF");
+
+    if (s.compareTo("ABCDEF") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: g) Svaret skal bli lik ABCDEF");
+        antallFeil++;
+    }
+
+    s = Oblig1.flett("ABCDE", "F");
+
+    if (s.compareTo("AFBCDE") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: h) Svaret skal bli lik AFBCDE");
+        antallFeil++;
+    }
+
+    s = Oblig1.flett("ACEGIK", "BDFHJLMN");
+
+    if (s.compareTo("ABCDEFGHIJKLMN") != 0)
+    {
+      System.out.println
+        ("Oppgave 7a: i) Svaret skal bli lik ABCDEFGHIJKLMN");
+        antallFeil++;
+    }
+
+    return antallFeil;
+  }
     ///// Oppgave 6 //////////////////////////////////////
 
     public static int oppgave6() {
@@ -89,7 +178,6 @@ public class Oblig1 {
         long tid = System.currentTimeMillis();
         Oblig1.rotasjon(x, 99_999);
         tid = System.currentTimeMillis() - tid;
-        System.out.println(tid);
         if (tid > 20) {
             System.out.println("Oppgave 6: i) Metoden "
                     + "er for ineffektiv. må forbedres!");
@@ -155,10 +243,10 @@ public class Oblig1 {
             }
         } else {
             while (t < 0) {
-                if (ant == 10) {
+                if (ant == -10) {
                     ant = 0;
                 }
-                ant++;
+                ant--;
                 t++;
             }
         }
@@ -348,9 +436,25 @@ public class Oblig1 {
                     a[lengde] = mellomholder;
                     antganger--;
                 }
-                //regne ut hvor mange ganger rotasjonen går rundt, 
-                //finne ut posisjonen til siste rotasjon og plassere elementene
             }
         }
     }
+    public static String flett(String a, String b)
+  {
+    char[] g = a.toCharArray();
+    char[] l = b.toCharArray();
+    char[] c = new char[g.length + l.length];  // en tabell av rett størrelse
+    int i = 0, j = 0, k = 0;                 // løkkevariabler
+
+    while (i < g.length && j < l.length)
+    {
+      c[k++] = g[i++];      // først en verdi fra a
+      c[k++] = l[j++];      // så en verdi fra b
+    }
+    // vi må ta med resten
+    while (i < g.length) c[k++] = g[i++];
+    while (j < l.length) c[k++] = l[j++];
+    
+    return new String(c);
+  }
 }
