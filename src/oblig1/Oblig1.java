@@ -10,9 +10,8 @@ public class Oblig1 {
 
     public static void main(String... args) {
         int[] random = randPerm(10);
-        char[] a = {'A','B','C','D','E','F','G','H','I','J'};
-        rotasjon(a,4);
-        System.out.println(Arrays.toString(a));
+        String a = flett("AM ","L","GEDS","ORATKRR","","R TRTE","IO","TGAUU");
+        System.out.println(flett("hei", "hade", "hallo"));
     }
 
     public static void bytt(int[] a, int i, int j) {
@@ -27,6 +26,31 @@ public class Oblig1 {
             System.out.print(m + ",");
             bytt(a, i - 1, m);
         }
+    }
+
+    public static int antPlasser(int t) {
+        int ant = 0;
+        if (t > 0) {
+            while (t > 0) {
+                if (ant == 10) {
+                    ant = 0;
+                }
+                ant++;
+                t--;
+            }
+        } else {
+            while (t < 0) {
+                if (ant == 10) {
+                    ant = 0;
+                }
+                ant++;
+                t++;
+            }
+        }
+        if (ant == 10) {
+            return 0;
+        }
+        return ant;
     }
 
     public static int maks(int[] a, int fra, int til) {
@@ -181,9 +205,7 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a, int k) {
-        int nyK = a.length;
-        k %= nyK;
-        System.out.println(nyK);
+        int nyK = antPlasser(k);
         if (a.length != 0) {
             int lengde = a.length - 1;
             char mellomholder;
