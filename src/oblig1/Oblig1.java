@@ -457,4 +457,25 @@ public class Oblig1 {
     
     return new String(c);
   }
+    public static String flett1(String... s){
+        Boolean stop = false;
+        String res ="";
+        int teller = 0;
+        int teller2 = 0;
+        int l = 0;
+        
+        for(String t : s){
+            teller2++;
+           int g = t.length();
+           if(teller2 <= g){
+               stop = false;
+                res += t.substring(0 + teller);
+                teller++;
+           }else stop = true;
+           
+        }
+        return res;
+    }
 }
+
+
