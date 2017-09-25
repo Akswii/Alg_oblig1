@@ -3,8 +3,8 @@ package oblig1;
 import java.util.*;
 
 /**
- *
  * Aksel Wiig s232324
+ * Tommy Tran s315573
  */
 public class Oblig1 {
 
