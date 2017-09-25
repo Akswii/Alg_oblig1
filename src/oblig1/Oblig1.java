@@ -253,8 +253,9 @@ public class Oblig1 {
 
         return r;
     }
+    
     //Effektivitetstesting
-    public static int min(int[] a, int fra, int til) { //minsteverdi i et utvalgt snitt av en array
+    public static int min(int[] a, int fra, int til) {
         fratilKontroll(a.length, fra, til);
         int m = fra;
         int minsteverdi = a[fra];
@@ -275,115 +276,115 @@ public class Oblig1 {
     }
 
     public static void innsettingssortering(int[] a) {
-        for (int i = 1; i < a.length; i++) // starter med i = 1
+        for (int i = 1; i < a.length; i++)
         {
-            int verdi = a[i], j = i - 1;      // verdi er et tabellelemnet, j er en indeks
+            int verdi = a[i], j = i - 1;
             for (; j >= 0 && verdi < a[j]; j--) {
-                a[j + 1] = a[j];  // sammenligner og flytter
+                a[j + 1] = a[j];
             }
-            a[j + 1] = verdi;                 // j + 1 er rett sortert plass
+            a[j + 1] = verdi;
         }
     }
 
     private static int parter0(int[] a, int v, int h, int skilleverdi) {
-        while (true) // stopper når v > h
+        while (true)
         {
             while (v <= h && a[v] < skilleverdi) {
-                v++;   // h er stoppverdi for v
+                v++;
             }
             while (v <= h && a[h] >= skilleverdi) {
-                h--;  // v er stoppverdi for h      
+                h--;    
             }
             if (v < h) {
-                bytt(a, v++, h--);                 // bytter om a[v] og a[h]
+                bytt(a, v++, h--);
             } else {
-                return v;  // a[v] er nåden første som ikke er mindre enn skilleverdi
+                return v;
             }
         }
     }
 
-    public static void fratilKontroll(int tablengde, int fra, int til) { //teste gyldigheten av et tabellintervall
-        if (fra < 0) // fra er negativ
+    public static void fratilKontroll(int tablengde, int fra, int til) {
+        if (fra < 0)
         {
             throw new ArrayIndexOutOfBoundsException("fra(" + fra + ") er negativ!");
         }
 
-        if (til > tablengde) // til er utenfor tabellen
+        if (til > tablengde)
         {
             throw new ArrayIndexOutOfBoundsException("til(" + til + ") > tablengde(" + tablengde + ")");
         }
 
-        if (fra > til) // fra er større enn til
+        if (fra > til)
         {
             throw new IllegalArgumentException("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
         }
 
-        if (fra == til) { //fra er den samme verdien som til
+        if (fra == til) {
             throw new NoSuchElementException("fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!");
         }
     }
 
     private static int sParter0(int[] a, int v, int h, int indeks) {
-        bytt(a, indeks, h);           // skilleverdi a[indeks] flyttes bakerst
-        int pos = parter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h − 1]
-        bytt(a, pos, h);              // bytter for å få skilleverdien på rett plass
-        return pos;                   // returnerer posisjonen til skilleverdien
+        bytt(a, indeks, h);
+        int pos = parter0(a, v, h - 1, a[h]);  
+        bytt(a, pos, h);              
+        return pos;                   
     }
 
-    private static void kvikksortering0(int[] a, int v, int h) // en privat metode
+    private static void kvikksortering0(int[] a, int v, int h)
     {
         if (v >= h) {
-            return;  // a[v:h] er tomt eller har maks ett element
+            return;
         }
-        int k = sParter0(a, v, h, (v + h) / 2);  // bruker midtverdien
-        kvikksortering0(a, v, k - 1);     // sorterer intervallet a[v:k-1]
-        kvikksortering0(a, k + 1, h);     // sorterer intervallet a[k+1:h]
+        int k = sParter0(a, v, h, (v + h) / 2);
+        kvikksortering0(a, v, k - 1);     
+        kvikksortering0(a, k + 1, h);     
     }
 
-    public static void kvikksortering(int[] a, int fra, int til) // a[fra:til>
+    public static void kvikksortering(int[] a, int fra, int til)
     {
-        fratilKontroll(a.length, fra, til);  // sjekker når metoden er offentlig
-        kvikksortering0(a, fra, til - 1);  // v = fra, h = til - 1
+        fratilKontroll(a.length, fra, til);
+        kvikksortering0(a, fra, til - 1);
     }
 
-    public static void kvikksortering(int[] a) // sorterer hele tabellen
+    public static void kvikksortering(int[] a)
     {
         kvikksortering0(a, 0, a.length - 1);
     }
 
     private static void flett(int[] a, int[] b, int fra, int m, int til) {
-        int n = m - fra;                // antall elementer i a[fra:m>
-        System.arraycopy(a, fra, b, 0, n);  // kopierer a[fra:m> over i b[0:n>
+        int n = m - fra;
+        System.arraycopy(a, fra, b, 0, n); 
 
-        int i = 0, j = m, k = fra;      // løkkeST0r og indekser
+        int i = 0, j = m, k = fra;
 
-        while (i < n && j < til) // fletter b[0:n> og a[m:til> og
-        {                               // legger resultatet i a[fra:til>
+        while (i < n && j < til)
+        {                       
             a[k++] = b[i] <= a[j] ? b[i++] : a[j++];
         }
 
         while (i < n) {
-            a[k++] = b[i++];  // tar med resten av b[0:n>
+            a[k++] = b[i++];
         }
     }
 
     private static void flettesortering(int[] a, int[] b, int fra, int til) {
         if (til - fra <= 1) {
-            return;   // a[fra:til> har maks ett element
+            return;
         }
-        int m = (fra + til) / 2;        // midt mellom fra og til
+        int m = (fra + til) / 2;       
 
-        flettesortering(a, b, fra, m);   // sorterer a[fra:m>
-        flettesortering(a, b, m, til);   // sorterer a[m:til>
+        flettesortering(a, b, fra, m); 
+        flettesortering(a, b, m, til); 
 
         if (a[m - 1] > a[m]) {
-            flett(a, b, fra, m, til);  // fletter a[fra:m> og a[m:til>
+            flett(a, b, fra, m, til);  
         }
     }
 
     public static void flettesortering(int[] a) {
-        int[] b = Arrays.copyOf(a, a.length / 2);   // en hjelpetabell for flettingen
-        flettesortering(a, b, 0, a.length);          // kaller metoden over
+        int[] b = Arrays.copyOf(a, a.length / 2);
+        flettesortering(a, b, 0, a.length);      
     }
 
     public static void tidSorteringer(int[] a) {
