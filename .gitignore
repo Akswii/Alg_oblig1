@@ -1,7 +1,14 @@
 nbproject/private/
 build/
-build/classes/oblig1/Oblig1.class
 nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+# Class Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
