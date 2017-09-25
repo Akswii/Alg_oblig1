@@ -9,8 +9,8 @@ import java.util.*;
 public class Oblig1 {
 
     public static void main(String... args) {
-        int[] a = randPerm(100000);
-        tidSorteringer(a);
+        int[]a = {1,2,3,4,5,6};
+        System.out.println(Arrays.toString(sumX(a, 5)));
     }
 
     public static void bytt(int[] a, int i, int j) {
@@ -88,18 +88,19 @@ public class Oblig1 {
         return a;
     }
 
-    public static int min(int[] a) {
-        if (a.length == 0) {
-            throw new NoSuchElementException("Tabellen er tom!");
+    public static int min(int[]a){
+        int n = a.length;
+        if(n < 0){
+            throw new NoSuchElementException("Tom array");
         }
-        int m = 0;
-
-        for (int i = 1; i < a.length; i++) {
-            if (a[m] > a[i]) {
-                bytt(a, m, i);
+      
+        for (int i = n-1; i > 0; i--) {
+            if (a[i] < a[i-1]) {
+                bytt(a, i, i-1);
             }
         }
         return a[0];
+        
     }
 
     public static int ombyttinger(int[] a) {
@@ -413,4 +414,15 @@ public class Oblig1 {
         tid = System.currentTimeMillis() - tid;
         System.out.println("Flettesortering: " + tid);
     }
+    
+     public static int[] sumX(int[] a, int x){
+         for (int i = 0; i < 10; i++) {
+             for (int j = 0; j < 10; j++) {
+                 if((a[i] + a[j]) == x){
+                     return new int[]{a[i],a[j]};
+                 }
+             }
+         }
+         return null;
+     }
 }
