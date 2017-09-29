@@ -3,11 +3,11 @@ package oblig1;
 import java.util.*;
 
 /**
+<<<<<<< HEAD
  * Aksel Wiig s232324 
  * Tommy Tran s315573
  */
 public class Oblig1 {
-
     public static void bytt(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
@@ -59,10 +59,10 @@ public class Oblig1 {
         }
         return m;
     }
-
+    
     public static int min(int[] a) {
         int n = a.length;
-        if (n < 0) {
+        if (n <= 0) {
             throw new NoSuchElementException("Tom array");
         }
 
@@ -82,18 +82,17 @@ public class Oblig1 {
 
         int m = 0, ant = 0;
 
-        for (int i = 1; i < a.length; i++) {
-            if (a[m] > a[i]) {
-
-                bytt(a, m, i);
+        for (int i = a.length - 1; i > 0; i--) {
+            if (a[i] < a[i - 1]) {
+                bytt(a, i, i - 1);
                 ant++;
             }
         }
         return ant;
     }
 
-    public static int modus(int[] a) {
-        if (a.length < 0) {
+    public static int modus1(int[] a) {
+        if (a.length <= 0) {
             throw new IllegalStateException("Arrayen er tom.");
         }
 
@@ -102,19 +101,21 @@ public class Oblig1 {
                 throw new IllegalStateException("Tabellen er ikke sortert.");
             }
         }
-
         int antTall = 0, maks = 0, maksverdi = 0;
-
-        for (int i = 0; i < a.length - 1; i++) {
-            if (a[i] == a[i + 1]) {
-                antTall++;
-                if (antTall >= maks) {
-                    maks = antTall;
-                    maksverdi = a[i];
+        if (a.length > 1) {
+            for (int i = 0; i < a.length - 1; i++) {
+                if (a[i] == a[i + 1]) {
+                    antTall++;
+                    if (antTall >= maks) {
+                        maks = antTall;
+                        maksverdi = a[i];
+                    }
+                } else {
+                    antTall = 0;
                 }
-            } else {
-                antTall = 0;
             }
+        } else {
+            return a[0];
         }
         return maksverdi;
     }
