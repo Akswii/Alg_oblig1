@@ -27,9 +27,10 @@ public class Oblig1 {
                 if (ant == 10) {
                     ant = 0;
                 }
-                ant--;
+                ant++;
                 t++;
             }
+            ant *= -1;
         }
         if (ant == 10) {
             return 0;
