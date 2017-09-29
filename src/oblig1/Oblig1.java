@@ -3,9 +3,7 @@ package oblig1;
 import java.util.*;
 
 /**
-<<<<<<< HEAD
- * Aksel Wiig s232324 
- * Tommy Tran s315573
+ * Aksel Wiig s232324 Tommy Tran s315573
  */
 public class Oblig1 {
     public static void bytt(int[] a, int i, int j) {
@@ -29,7 +27,7 @@ public class Oblig1 {
                 if (ant == 10) {
                     ant = 0;
                 }
-                ant++;
+                ant--;
                 t++;
             }
         }
@@ -59,7 +57,7 @@ public class Oblig1 {
         }
         return m;
     }
-    
+
     public static int min(int[] a) {
         int n = a.length;
         if (n <= 0) {
@@ -171,7 +169,6 @@ public class Oblig1 {
                 a[i] = a[i - 1];
             }
             a[0] = mellomholder;
-            System.out.println(Arrays.toString(a));
         }
     }
 
