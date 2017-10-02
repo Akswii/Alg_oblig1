@@ -7,11 +7,6 @@ import java.util.*;
  */
 public class Oblig1 {
 
-    public static void main(String... args) {
-        int[] a = {1,2,3,4,5,6,7,8,9,10};
-        rotasjon(a, 5)
-    }
-
     public static void bytt(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
@@ -89,22 +84,6 @@ public class Oblig1 {
         }
         return a[0];
 
-    }
-
-    public static int ombyttinger(int[] a) {
-        if (a.length == 0) {
-            throw new NoSuchElementException("Tabellen er tom!");
-        }
-
-        int m = 0, ant = 0;
-
-        for (int i = a.length - 1; i > 0; i--) {
-            if (a[i] < a[i - 1]) {
-                bytt(a, i, i - 1);
-                ant++;
-            }
-        }
-        return ant;
     }
 
     public static int modus1(int[] a) {
@@ -214,8 +193,9 @@ public class Oblig1 {
                     a[i] = tmp[i];
                 }
             }
-            // Mot venstre
-        } else if (k < 0) {
+        }
+        // Mot venstre
+        else if (k < 0) {
             k = Math.abs(k);
 
             for (int i = 0; i < k; i++) {
