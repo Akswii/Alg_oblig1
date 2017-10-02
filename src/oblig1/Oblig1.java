@@ -6,6 +6,12 @@ import java.util.*;
  * Aksel Wiig s232324 Tommy Tran s315573
  */
 public class Oblig1 {
+
+    public static void main(String... args) {
+        int[] a = {1,2,3,4,5,6,7,8,9,10};
+        rotasjon(a, 5)
+    }
+
     public static void bytt(int[] a, int i, int j) {
         int temp = a[i];
         a[i] = a[j];
@@ -16,7 +22,7 @@ public class Oblig1 {
         int ant = 0;
         if (t > 0) {
             while (t > 0) {
-                if (ant == a ) {
+                if (ant == a) {
                     ant = 0;
                 }
                 ant++;
@@ -30,7 +36,7 @@ public class Oblig1 {
                 ant++;
                 t++;
             }
-           ant *= -1;
+            ant *= -1;
         }
         if (ant == a) {
             return 0;
@@ -59,6 +65,17 @@ public class Oblig1 {
         return m;
     }
 
+    /*
+        Det blir gjort n-1 sammenligniner i min-metoden vår.
+        Det blir gjort flest ombyttninger når tabellen er sortert synkende, ettersom vi begynner bakerst og flytter det minste tallet til framst i tabellen.
+        Det blir gjort færrest ombyttinger når tabellen er sortert stigende.
+    
+        Hvis alle verdiene er forskjellige, blir det en 
+        ombytting hver gang det kommer en verdi som er mindre enn den minste du har funnet tidligere i tabellen. 
+        Av de n - 1 verdiene som kommer etter den første, er det i gjennomsnitt H(n) - 1 stykker som er mindre 
+        enn den minste foran. Dermed blir svaret n - 1 - (H(n) - 1) =
+        n - H(n) der H(n) er det n-te harmoniske tallet.
+     */
     public static int min(int[] a) {
         int n = a.length;
         if (n <= 0) {
@@ -174,31 +191,43 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a, int k) {
-        int nyK = antPlasser(k, a.length);
-        if (a.length != 0) {
-            int lengde = a.length - 1;
-            char mellomholder;
-            int antganger = 0;
+        int n = a.length;
 
-            if (nyK >= 0) {
-                while (antganger < nyK) {
+        if (n < 2) {
+            return;
+        }
 
-                    mellomholder = a[lengde];
-                    for (int j = lengde; j > 0; j--) {
-                        a[j] = a[j - 1];
-                    }
-                    a[0] = mellomholder;
-                    antganger++;
+        k %= n;
+
+        char[] tmp = new char[Math.abs(k)];
+        int c = 0;
+
+        // Mot høyre
+        if (k > 0) {
+            for (int i = n - k; i < n; i++) {
+                tmp[c++] = a[i];
+            }
+
+            for (int i = n - k - 1; i >= 0; i--) {
+                a[k + i] = a[i];
+                if (i < k) {
+                    a[i] = tmp[i];
                 }
-            } else {
-                while (antganger > nyK) {
-                    mellomholder = a[0];
-                    for (int j = 0; j < lengde; j++) {
-                        a[j] = a[j + 1];
-                    }
-                    a[lengde] = mellomholder;
-                    antganger--;
-                }
+            }
+            // Mot venstre
+        } else if (k < 0) {
+            k = Math.abs(k);
+
+            for (int i = 0; i < k; i++) {
+                tmp[i] = a[i];
+            }
+
+            for (int i = 0; i <= n - k - 1; i++) {
+                a[i] = a[k + i];
+            }
+
+            for (int i = 0; i < tmp.length; i++) {
+                a[n - i - 1] = tmp[k - i - 1];
             }
         }
     }
