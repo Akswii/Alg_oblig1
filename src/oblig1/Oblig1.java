@@ -13,32 +13,6 @@ public class Oblig1 {
         a[j] = temp;
     }
 
-    public static int antPlasser(int t, int a) {
-        int ant = 0;
-        if (t > 0) {
-            while (t > 0) {
-                if (ant == a) {
-                    ant = 0;
-                }
-                ant++;
-                t--;
-            }
-        } else {
-            while (t < 0) {
-                if (ant == a) {
-                    ant = 0;
-                }
-                ant++;
-                t++;
-            }
-            ant *= -1;
-        }
-        if (ant == a) {
-            return 0;
-        }
-        return ant;
-    }
-
     public static int maks(int[] a, int fra, int til) {
 
         if (a == null) {
@@ -71,6 +45,7 @@ public class Oblig1 {
         enn den minste foran. Dermed blir svaret n - 1 - (H(n) - 1) =
         n - H(n) der H(n) er det n-te harmoniske tallet.
      */
+    
     public static int min(int[] a) {
         int n = a.length;
         if (n <= 0) {
@@ -84,6 +59,22 @@ public class Oblig1 {
         }
         return a[0];
 
+    }
+
+    public static int ombyttinger(int[] a) {
+        if (a.length == 0) {
+            throw new NoSuchElementException("Tabellen er tom!");
+        }
+
+        int m = 0, ant = 0;
+
+        for (int i = a.length - 1; i > 0; i--) {
+            if (a[i] < a[i - 1]) {
+                bytt(a, i, i - 1);
+                ant++;
+            }
+        }
+        return ant;
     }
 
     public static int modus1(int[] a) {
