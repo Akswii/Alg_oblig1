@@ -12,11 +12,11 @@ public class Oblig1 {
         a[j] = temp;
     }
 
-    public static int antPlasser(int t) {
+    public static int antPlasser(int t, int a) {
         int ant = 0;
         if (t > 0) {
             while (t > 0) {
-                if (ant == 10) {
+                if (ant == a ) {
                     ant = 0;
                 }
                 ant++;
@@ -24,15 +24,15 @@ public class Oblig1 {
             }
         } else {
             while (t < 0) {
-                if (ant == 10) {
+                if (ant == a) {
                     ant = 0;
                 }
                 ant++;
                 t++;
             }
-            ant *= -1;
+           ant *= -1;
         }
-        if (ant == 10) {
+        if (ant == a) {
             return 0;
         }
         return ant;
@@ -174,7 +174,7 @@ public class Oblig1 {
     }
 
     public static void rotasjon(char[] a, int k) {
-        int nyK = antPlasser(k);
+        int nyK = antPlasser(k, a.length);
         if (a.length != 0) {
             int lengde = a.length - 1;
             char mellomholder;
